@@ -229,7 +229,7 @@ fig1.write_html(buffer, include_plotlyjs='cdn')
 html_bytes = buffer.getvalue().encode()
 
 buffer = io.StringIO()
-fig2.write_html(buffer, include_plotlyjs='cdn')
+fig3.write_html(buffer, include_plotlyjs='cdn')
 html_bytes1 = buffer.getvalue().encode()
 
 col1,col2 = st.columns(2)
@@ -245,3 +245,27 @@ col2.download_button(
     data=html_bytes1,
     file_name=f'{fred_code}.html',
     mime='text/html')
+
+
+########################################### banner final ###############################
+html_br="""
+<br>
+"""
+st.markdown(html_br, unsafe_allow_html=True)
+
+html_line="""
+<br>
+<br>
+<br>
+<br>
+<p style="color:Gainsboro; text-align: left;">Fonte: FRED.</p>
+<hr style= "  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1.5px;">
+<p style="color:Gainsboro; text-align: right;">Desenvolvido por: Caíque Cober</p>
+"""
+st.markdown(html_line, unsafe_allow_html=True)
