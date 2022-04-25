@@ -225,7 +225,7 @@ col2.plotly_chart(fig3,use_container_width=True)
 
 #################################### download button ###################################################################################
 buffer = io.StringIO()
-fig1.write_html(buffer, include_plotlyjs='cdn')
+fig2.write_html(buffer, include_plotlyjs='cdn')
 html_bytes = buffer.getvalue().encode()
 
 buffer = io.StringIO()
