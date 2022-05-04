@@ -27,7 +27,7 @@ html_header="""
 <meta name="author" content="@Cober">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<h1 style="font-size:300%; color:#034B88; font-family:Mulish; font-weight:800"> StoneX FRED Visualizer 
+<h1 style="font-size:300%; color:#034B88; font-family:Mulish; font-weight:800"> StoneX FRED Visualizador
  <hr style= "  display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -80,7 +80,7 @@ def ts_plot_mc(code, nome, source, units, chart):
 
     
     fig = go.Figure()
-    colors = ['#E0D253', '#0A3254', '#B2292E','#7AADD4','#336094']
+    colors = [ '#0A3254', '#B2292E','#E0D253','#7AADD4','#336094']
 
 
 
@@ -194,20 +194,16 @@ def get_series(id_selected):
 
 ################################################ Streamlit App #########################################################################
 
-
+#Options headers
 col1, col2, col3 = st.columns(3)
 fred_code = col1.text_input('Código do FRED', value="CPILFESL")
 titulo = col2.text_input('Título do Gráfico', value="Inflação dos EUA")
 
-# fred_name = st.text_input('Name', value="CPILFESL")
-# fred_unit = st.text_input('Unit', value="CPILFESL")
-
+st.markdown(html_line_2, unsafe_allow_html=True)
 
 _ , units  = get_series(fred_code)
 
 #generate figures
-#ig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'Normal')
-
 fig = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX',units,  'Normal')
 fig1 = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX.', units, 'percent_change')
 fig2 = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX.', units, 'percent_change_12')
@@ -218,14 +214,6 @@ col1.plotly_chart(fig,use_container_width=True)
 col2.plotly_chart(fig1,use_container_width=True)
 col1.plotly_chart(fig2,use_container_width=True)
 col2.plotly_chart(fig3,use_container_width=True)
-
-# st.markdown(html_line_2, unsafe_allow_html=True)
-# fig1 = ts_plot_mc('MORTGAGE30US', 'Evolution the 30 Year Fixed Mortagade rate', 'Source: FRED, Macro Compass.', 'Index')
-# fig2 = ts_plot_mc('CPILFESL','CPI excluding food and energy', 'Source: FRED, Macro Compass.','Percent Change (%)')
-
-# col1, col2 = st.columns(2)
-# col1.plotly_chart(fig1,use_container_width=True)
-# col2.plotly_chart(fig2, use_container_width=True)
 
 #################################### download button ###################################################################################
 buffer = io.StringIO()
