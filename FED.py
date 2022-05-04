@@ -1,5 +1,3 @@
-#ANP_DISTRIBUIDORAS
-from distutils import text_file
 import streamlit as st
 import pandas as pd
 #pacotes utilizados
@@ -50,7 +48,7 @@ html_line_2="""
   border-width: 1.5px;">
 """
 
-link_imagem_stonex = 'https://raw.githubusercontent.com/caiquecober/Research/master/35131080148.png'
+link_imagem_stonex = 'https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png'
 
 st.set_page_config(page_title="StoneX - Energy", page_icon=link_imagem_stonex, layout="wide")
 
@@ -61,7 +59,6 @@ st.markdown(""" <style>
 footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
 
-#Macrocompass and microhive functions
 
 def ts_plot_mc(code, nome, source, units, chart):
     df  =  get_obs(code)
@@ -71,13 +68,13 @@ def ts_plot_mc(code, nome, source, units, chart):
     
     if chart == 'percent_change_12':
         df = df.pct_change().rolling(12).sum()
-        units = ' Percent Change (%) - 12 Month Rolling Sum'
+        units = 'Variação Percentual Acumulada em 12 meses'
     elif chart =='percent_change':
          df = df.pct_change()
-         units = 'Percent Change (%)'
+         units = 'Variação Percentual (%)'
     elif chart == 'nominal_diff':
          df = df.diff()
-         units=  'First Diference'
+         units=  'First Difference'
     else: 
         print('Normal Config')
 
@@ -139,6 +136,9 @@ def ts_plot_mc(code, nome, source, units, chart):
                                  #yaxis_tickformat = ',.0%'                                
     
                                  )
+    
+    if chart =='percent_change' or  chart == 'percent_change_12':
+            fig.update_layout(yaxis= { 'tickformat': ',.0%'})
                                  
     return fig
 
@@ -197,6 +197,9 @@ def get_series(id_selected):
 
 
 fred_code = st.text_input('Chose Fred code to Visualize Chart', value="CPILFESL")
+nome = st.text_input(label, value="")
+source = st.text_input(label, value="")
+
 # fred_name = st.text_input('Name', value="CPILFESL")
 # fred_unit = st.text_input('Unit', value="CPILFESL")
 
@@ -204,10 +207,11 @@ fred_code = st.text_input('Chose Fred code to Visualize Chart', value="CPILFESL"
 titulo, units  = get_series(fred_code)
 
 #generate figures
-fig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'Normal')
+#ig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'Normal')
 fig1 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change')
 fig2 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change_12')
 fig3 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'nominal_diff')
+fig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Stonex, 'Normal')
 
 col1, col2 = st.columns(2)
 col1.plotly_chart(fig,use_container_width=True)
