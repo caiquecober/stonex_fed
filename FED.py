@@ -15,7 +15,7 @@ import base64
 import io
 api_key = 'daece1e7e3daf0bcd26c06cdef0009bb'
 ############################################################## Streamlit APP ##################################################################################################
-
+#elementos HTML
 html_header="""
 <head>
 <style> @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap'); 
@@ -48,6 +48,11 @@ html_line_2="""
   border-width: 1.5px;">
 """
 
+html_br="""
+<br>
+"""
+
+#cofigs inciais
 link_imagem_stonex = 'https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png'
 
 st.set_page_config(page_title="StoneX - Macro", page_icon=link_imagem_stonex, layout="wide")
@@ -60,6 +65,7 @@ footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
 
 
+## funções utilizadas na aplicação!
 def ts_plot_mc(code, nome, source, units, chart):
     df  =  get_obs(code)
     df =  df.set_index('date')
@@ -237,6 +243,7 @@ html_bytes3 = buffer.getvalue().encode()
 
 #layout dos bottons
 st.markdown(html_line_2, unsafe_allow_html=True)
+st.markdown(html_br, unsafe_allow_html=True)
 col1,col2, col3, col4 = st.columns(4)
 
 col1.download_button(
@@ -266,11 +273,8 @@ col4.download_button(
     mime='text/html')
 
 
-
 ########################################### banner final ###############################
-html_br="""
-<br>
-"""
+
 st.markdown(html_br, unsafe_allow_html=True)
 
 html_line="""
