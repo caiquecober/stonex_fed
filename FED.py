@@ -27,7 +27,7 @@ html_header="""
 <meta name="author" content="@Cober">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<h1 style="font-size:300%; color:#034B88; font-family:Mulish; font-weight:800"> MacroCompass Visualizer   
+<h1 style="font-size:300%; color:#034B88; font-family:Mulish; font-weight:800"> StoneX FRED Visualizer 
  <hr style= "  display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -50,7 +50,7 @@ html_line_2="""
 
 link_imagem_stonex = 'https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png'
 
-st.set_page_config(page_title="StoneX - Energy", page_icon=link_imagem_stonex, layout="wide")
+st.set_page_config(page_title="StoneX - Macro", page_icon=link_imagem_stonex, layout="wide")
 
 st.markdown('<style>body{background-color: #D2D5D4}</style>',unsafe_allow_html=True)
 st.markdown(html_header, unsafe_allow_html=True)
@@ -74,7 +74,7 @@ def ts_plot_mc(code, nome, source, units, chart):
          units = 'Variação Percentual (%)'
     elif chart == 'nominal_diff':
          df = df.diff()
-         units=  'First Difference'
+         units=  'Primeira diferença'
     else: 
         print('Normal Config')
 
@@ -115,7 +115,7 @@ def ts_plot_mc(code, nome, source, units, chart):
                              yaxis_title=units, 
                              template='plotly_white',
                              font_family="Verdana",
-                             images=[dict(source='https://raw.githubusercontent.com/caiquecober/Research/master/35131080148.png',#'https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png',
+                             images=[dict(source='https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png',
                                  xref="paper", yref="paper",
                                  x=0.5, y=0.5,
                                  sizex=0.7, sizey=0.7,
@@ -195,15 +195,15 @@ def get_series(id_selected):
 ################################################ Streamlit App #########################################################################
 
 
-
-fred_code = st.text_input('Código do FRED', value="CPILFESL")
-titulo = st.text_input('Título do Gráfico', value="Inflação dos EUA")
+col1, col2, col3 = st.columns(3)
+fred_code = col1.text_input('Código do FRED', value="CPILFESL")
+titulo = col2.text_input('Título do Gráfico', value="Inflação dos EUA")
 
 # fred_name = st.text_input('Name', value="CPILFESL")
 # fred_unit = st.text_input('Unit', value="CPILFESL")
 
 
-titulo, units  = get_series(fred_code)
+_ , units  = get_series(fred_code)
 
 #generate figures
 #ig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'Normal')
