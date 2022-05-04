@@ -80,7 +80,7 @@ def ts_plot_mc(code, nome, source, units, chart):
 
     
     fig = go.Figure()
-    colors = ['#034B88', '#B55802', '#000000']
+    colors = ['#E0D253', '#0A3254', '#B2292E','#7AADD4','#336094']
 
 
 
@@ -118,7 +118,7 @@ def ts_plot_mc(code, nome, source, units, chart):
                              images=[dict(source='https://raw.githubusercontent.com/caiquecober/Research/master/LOGO_STONEX.png',
                                  xref="paper", yref="paper",
                                  x=0.5, y=0.5,
-                                 sizex=0.7, sizey=0.7,
+                                 sizex=0.55, sizey=0.55,
                                  opacity=0.2,
                                  xanchor="center",
                                  yanchor="middle",
@@ -207,10 +207,11 @@ _ , units  = get_series(fred_code)
 
 #generate figures
 #ig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'Normal')
-fig1 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change')
-fig2 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change_12')
-fig3 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'nominal_diff')
-fig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Stonex',units,  'Normal')
+
+fig = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX',units,  'Normal')
+fig1 = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX.', units, 'percent_change')
+fig2 = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX.', units, 'percent_change_12')
+fig3 = ts_plot_mc(fred_code, titulo, 'Fonte: FRED, StoneX.', units, 'nominal_diff')
 
 col1, col2 = st.columns(2)
 col1.plotly_chart(fig,use_container_width=True)
@@ -228,26 +229,46 @@ col2.plotly_chart(fig3,use_container_width=True)
 
 #################################### download button ###################################################################################
 buffer = io.StringIO()
-fig2.write_html(buffer, include_plotlyjs='cdn')
+fig.write_html(buffer, include_plotlyjs='cdn')
 html_bytes = buffer.getvalue().encode()
 
 buffer = io.StringIO()
-fig3.write_html(buffer, include_plotlyjs='cdn')
+fig1.write_html(buffer, include_plotlyjs='cdn')
 html_bytes1 = buffer.getvalue().encode()
 
-col1,col2 = st.columns(2)
+buffer = io.StringIO()
+fig2.write_html(buffer, include_plotlyjs='cdn')
+html_bytes2 = buffer.getvalue().encode()
+
+buffer = io.StringIO()
+fig3.write_html(buffer, include_plotlyjs='cdn')
+html_bytes3 = buffer.getvalue().encode()
+
+col1,col2, col3, col4 = st.columns(4)
 
 col1.download_button(
-    label='Download Chart HTML',
+    label='Download HTML fig',
     data=html_bytes,
     file_name=f'{fred_code}.html',
     mime='text/html')
 
 col2.download_button(
-    label='Download Chart HTML',
+    label='Download HTML fig1',
     data=html_bytes1,
     file_name=f'{fred_code}.html',
     mime='text/html')
+
+    Label='Download HTML fig2',
+    data=html_bytes2,
+    file_name=f'{fred_code}.html',
+    mime='text/html')
+
+col2.download_button(
+    label='Download HTML fig3',
+    data=html_bytes3,
+    file_name=f'{fred_code}.html',
+    mime='text/html')
+
 
 
 ########################################### banner final ###############################
