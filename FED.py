@@ -258,12 +258,15 @@ col2.download_button(
     file_name=f'{fred_code}.html',
     mime='text/html')
 
-    Label='Download HTML fig2',
+
+
+col3.download_button(
+    label='Download HTML fig2',
     data=html_bytes2,
     file_name=f'{fred_code}.html',
     mime='text/html')
 
-col2.download_button(
+col4.download_button(
     label='Download HTML fig3',
     data=html_bytes3,
     file_name=f'{fred_code}.html',
