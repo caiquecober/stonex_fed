@@ -196,8 +196,8 @@ def get_series(id_selected):
 
 
 
-fred_code = st.text_input('Chose Fred code to Visualize Chart', value="CPILFESL")
-titulo = st.text_input(label, value="")
+fred_code = st.text_input('Código do FRED', value="CPILFESL")
+titulo = st.text_input('Título do Gráfico', value="Inflação dos EUA")
 
 # fred_name = st.text_input('Name', value="CPILFESL")
 # fred_unit = st.text_input('Unit', value="CPILFESL")
