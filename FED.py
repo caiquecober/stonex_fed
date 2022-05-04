@@ -197,8 +197,7 @@ def get_series(id_selected):
 
 
 fred_code = st.text_input('Chose Fred code to Visualize Chart', value="CPILFESL")
-nome = st.text_input(label, value="")
-source = st.text_input(label, value="")
+titulo = st.text_input(label, value="")
 
 # fred_name = st.text_input('Name', value="CPILFESL")
 # fred_unit = st.text_input('Unit', value="CPILFESL")
@@ -211,7 +210,7 @@ titulo, units  = get_series(fred_code)
 fig1 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change')
 fig2 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'percent_change_12')
 fig3 = ts_plot_mc(fred_code, titulo, 'Source: FRED, Macro Compass.', units, 'nominal_diff')
-fig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Stonex, 'Normal')
+fig = ts_plot_mc(fred_code, titulo, 'Source: FRED, Stonex',units,  'Normal')
 
 col1, col2 = st.columns(2)
 col1.plotly_chart(fig,use_container_width=True)
