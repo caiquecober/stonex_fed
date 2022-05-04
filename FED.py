@@ -216,6 +216,8 @@ col1.plotly_chart(fig2,use_container_width=True)
 col2.plotly_chart(fig3,use_container_width=True)
 
 #################################### download button ###################################################################################
+
+#codificando os gráficos
 buffer = io.StringIO()
 fig.write_html(buffer, include_plotlyjs='cdn')
 html_bytes = buffer.getvalue().encode()
@@ -232,6 +234,9 @@ buffer = io.StringIO()
 fig3.write_html(buffer, include_plotlyjs='cdn')
 html_bytes3 = buffer.getvalue().encode()
 
+
+#layout dos bottons
+st.markdown(html_line_2, unsafe_allow_html=True)
 col1,col2, col3, col4 = st.columns(4)
 
 col1.download_button(
