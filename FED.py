@@ -73,7 +73,7 @@ def ts_plot_mc(code, nome, source, units, chart):
     # define what type of chart will be made!
     
     if chart == 'percent_change_12':
-        df = df.pct_change().rolling(12).sum()
+        df = df.pct_change(1).rolling(12).sum()
         units = 'Variação Percentual Acumulada em 12 meses'
     elif chart =='percent_change':
          df = df.pct_change()
