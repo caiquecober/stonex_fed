@@ -144,7 +144,7 @@ def ts_plot_mc(code, nome, source, units, chart):
                                  )
     
     if chart =='percent_change' or  chart == 'percent_change_12':
-            fig.update_layout(yaxis= { 'tickformat': ',.1%'})
+            fig.update_layout(yaxis= { 'tickformat': ',.2%'})
                                  
     return fig
 
